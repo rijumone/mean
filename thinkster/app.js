@@ -11,7 +11,7 @@ app.controller('MainCtrl', [
     '$scope', 'posts',
     function ($scope, posts) {
 
-        $scope.posts = posts.posts;
+        
 
         $scope.test = 'Hello world!';
         $scope.posts = [
@@ -35,11 +35,12 @@ app.controller('MainCtrl', [
                     {author: 'Bob', body: 'Great idea but everything is wrong!', upvotes: 0}
                 ]
             });
+            posts.posts = $scope.posts;
             $scope.title = '';
             $scope.link = '';
         };
-
-        $scope.addComment = function () {
+/* obsolete
+        $scope.addComment = function () { console.log($scope.body);
             if ($scope.body === '') {
                 return;
             }
@@ -48,9 +49,11 @@ app.controller('MainCtrl', [
                 author: 'user',
                 upvotes: 0
             });
+
+            posts.post.comments  = $scope.post.comments;
             $scope.body = '';
         };
-
+*/
         $scope.incrementUpvotes = function (post) {
             post.upvotes += 1;
         };
@@ -61,8 +64,24 @@ app.controller('PostsCtrl', [
     '$scope',
     '$stateParams',
     'posts',
-    function ($scope, $stateParams, posts) {
+    function ($scope, $stateParams, posts) { //console.log(posts);
         $scope.post = posts.posts[$stateParams.id];
+
+
+        $scope.addComment = function () { //console.log($scope.body);
+            if ($scope.body === '') {
+                return;
+            }
+            $scope.post.comments.push({
+                body: $scope.body,
+                author: 'user',
+                upvotes: 5
+            });
+
+            posts.post  = $scope.post;
+            $scope.body = '';
+        };
+
     }]);
 
 app.config([
