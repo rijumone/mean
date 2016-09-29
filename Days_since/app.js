@@ -7,11 +7,20 @@ app.factory('posts', [function () {
         return o;
     }]);
 
+app.factory('list', [function () {
+        var o = {
+            list: [
+                {days: 4, event: 'had chicken'}
+            ]
+        };
+        return o;
+    }]);
+
 app.controller('MainCtrl', [
     '$scope', 'posts',
     function ($scope, posts) {
 
-        
+
 
         $scope.test = 'Hello world!';
         $scope.posts = [
@@ -39,21 +48,21 @@ app.controller('MainCtrl', [
             $scope.title = '';
             $scope.link = '';
         };
-/* obsolete
-        $scope.addComment = function () { console.log($scope.body);
-            if ($scope.body === '') {
-                return;
-            }
-            $scope.post.comments.push({
-                body: $scope.body,
-                author: 'user',
-                upvotes: 0
-            });
-
-            posts.post.comments  = $scope.post.comments;
-            $scope.body = '';
-        };
-*/
+        /* obsolete
+         $scope.addComment = function () { console.log($scope.body);
+         if ($scope.body === '') {
+         return;
+         }
+         $scope.post.comments.push({
+         body: $scope.body,
+         author: 'user',
+         upvotes: 0
+         });
+         
+         posts.post.comments  = $scope.post.comments;
+         $scope.body = '';
+         };
+         */
         $scope.incrementUpvotes = function (post) {
             post.upvotes += 1;
         };
@@ -78,10 +87,17 @@ app.controller('PostsCtrl', [
                 upvotes: 5
             });
 
-            posts.post  = $scope.posts;
+            posts.post = $scope.posts;
             $scope.body = '';
         };
 
+    }]);
+
+app.controller('ListsCtrl', [
+    '$scope',
+    'list',
+    function ($scope, list) { console.log(list.list);
+        $scope.list = list.list;
     }]);
 
 app.config([
@@ -100,6 +116,12 @@ app.config([
                     url: '/posts/{id}',
                     templateUrl: '/posts.html',
                     controller: 'PostsCtrl'
+                })
+
+                .state('list', {
+                    url: '/list',
+                    templateUrl: '/list.html',
+                    controller: 'ListsCtrl'
                 });
 
 
