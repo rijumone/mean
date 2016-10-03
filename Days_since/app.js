@@ -10,7 +10,8 @@ app.factory('posts', [function () {
 app.factory('list', [function () {
         var o = {
             list: [
-                {days: 4, event: 'had chicken'}
+                {days: 2, event: 'had chicken'},
+                {days: 1, event: 'smoked'}
             ]
         };
         return o;
@@ -96,8 +97,13 @@ app.controller('PostsCtrl', [
 app.controller('ListsCtrl', [
     '$scope',
     'list',
-    function ($scope, list) { console.log(list.list);
+    function ($scope, list) {// console.log(list.list);
         $scope.list = list.list;
+        $scope.showModal = false;
+        $scope.openAddBox  = function(){ //console.log(123);
+            $scope.showModal = !$scope.showModal;
+            console.log($scope.showModal);
+        };
     }]);
 
 app.config([
