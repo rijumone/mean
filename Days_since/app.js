@@ -99,11 +99,6 @@ app.controller('ListsCtrl', [
     'list',
     function ($scope, list) {// console.log(list.list);
         $scope.list = list.list;
-        $scope.showModal = false;
-        $scope.openAddBox  = function(){ //console.log(123);
-            $scope.showModal = !$scope.showModal;
-            console.log($scope.showModal);
-        };
     }]);
 
 app.config([
@@ -133,3 +128,4 @@ app.config([
 
         $urlRouterProvider.otherwise('home');
     }]);
+

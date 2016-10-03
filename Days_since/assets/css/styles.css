@@ -142,3 +142,8 @@ td.text-center {
 td.text-right {
   text-align: right;
 }
+
+
+.listdemoBasicUsage md-divider {
+  margin-top: 10px;
+  margin-bottom: 0; }
