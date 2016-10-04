@@ -10,8 +10,8 @@ app.factory('posts', [function () {
 app.factory('list', [function () {
         var o = {
             list: [
-                {days: 2, event: 'had chicken'},
-                {days: 1, event: 'smoked'}
+                {days: 2, event: 'did A'},
+                {days: 1, event: 'did B'}
             ]
         };
         return o;
@@ -92,13 +92,37 @@ app.controller('PostsCtrl', [
             $scope.body = '';
         };
 
+      
     }]);
 
 app.controller('ListsCtrl', [
     '$scope',
+    '$stateParams',
     'list',
-    function ($scope, list) {// console.log(list.list);
+    function ($scope, $stateParams, list) {// console.log(list.list);
         $scope.list = list.list;
+        $scope.addActivity = function(){
+           if($scope.days === "" || $scope.event === "" ) return;
+            list.list.push({
+                days: $scope.days,
+                event: $scope.event
+           });
+              $scope.list = list.list;
+        };
+
+          $scope.deleteActivity = function(item){ console.log(item);
+              console.log(list.list);
+              for(var k in list.list){
+                if(list.list[k]==item){
+                    // list.list[k] = [];
+                    list.list.splice(k, 1);
+                } 
+              }
+              $scope.list = list.list;
+              // console.log(list.list[$stateParams.id]);
+              // console.log($stateParams.id);
+        };
+
     }]);
 
 app.config([

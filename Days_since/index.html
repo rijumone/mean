@@ -3,7 +3,11 @@
         <title>Flapper News</title>
         <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
         <link href="assets/css/styles.css" rel="stylesheet">
+
 
         <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -115,33 +119,23 @@
               <h3>Data Table</h3>
           </div>
           <table class="table-fill">
-              <thead class="hide">
-                  <tr>
-                      <th class="text-left">Month</th>
-                      <th class="text-left">Sales</th>
-                  </tr>
-              </thead>
               <tbody class="table-hover">
                   <tr ng-repeat="item in list">
-                      <td class="text-right">{{item.days}} days since</td>
-                      <td class="text-left">I {{item.event}}</td>
+                      <td class="text-right">{{ item.days }} day{{item.days > 1 ? 's' : '' }} since</td>
+                      <td class="text-left">I {{ item.event }}</td>
+                      <td class="text-center"><a href="javascript:void(0)" ng-click="deleteActivity(item)"><i class="fa fa-trash"></i></a></td>
                   </tr>
               </tbody>
           </table>
 
 
 
-<form>
+<form ng-submit="addActivity()">
   <div class="form-group">
-    <label for="email">Email address:</label>
-    <input type="email" class="form-control" id="email">
+    <input type="number" class="form-control" ng-model="days" id="days_txt" placeholder="days">
   </div>
   <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd">
-  </div>
-  <div class="checkbox">
-    <label><input type="checkbox"> Remember me</label>
+    <input type="text" class="form-control" ng-model="event" id="event_txt" placeholder="event">
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
