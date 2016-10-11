@@ -101,6 +101,13 @@ app.controller('ListsCtrl', [
     'list',
     function ($scope, $stateParams, list) {// console.log(list.list);
         $scope.list = list.list;
+        // console.log($stateParams.id);
+        if($stateParams.id !== ""){
+
+        $scope.days = list.list[$stateParams.id].days;
+        $scope.event = list.list[$stateParams.id].event;
+           
+        }
         $scope.addActivity = function(){
            if($scope.days === "" || $scope.event === "" ) return;
             list.list.push({
@@ -145,6 +152,12 @@ app.config([
 
                 .state('list', {
                     url: '/list',
+                    templateUrl: '/list.html',
+                    controller: 'ListsCtrl'
+                })
+
+                .state('listid', {
+                    url: '/list/{id}',
                     templateUrl: '/list.html',
                     controller: 'ListsCtrl'
                 });
